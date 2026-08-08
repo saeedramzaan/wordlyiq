@@ -2,121 +2,108 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
-import './App.css'
+import ProtectedRoute from './ProtectedRoute';
+// import './App.css'
+
+import * as React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+// import "bootstrap/dist/css/bootstrap.css";
+import axios from 'axios';
+
+
+import { useNavigate } from "react-router-dom";
+// import ProtectedRoute from "./ProjtectedRoute";
+
+import { BrowserRouter as Router , Routes, Route, Link, useLocation } from "react-router-dom";
+
+
+// import ListWord from "./components/page/list.component";
+// import VerbList from "./components/page/listVerb.component";
+// import Create from "./components/page/create.component";
+// import CreateVerb from "./components/page/createVerb.component";
+import Home from "./components/home";
+import Login from "./components/login";
+import { Button } from "react-bootstrap";
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isLoggedIn = localStorage.getItem("token");
 
-      <div className="ticks"></div>
+  const logout = async () => {
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+    const token = localStorage.getItem("token");
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    console.log(token);
+    await axios.post("https://lara-project-mocha.vercel.app/mapi/logout",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+ );
+
+ 
+    localStorage.removeItem("token");
+     navigate("/login");
+
+   }
+
+  return (<>
+    <Navbar bg="primary">
+
+      <Container>
+        
+         {location.pathname == "/login" && ( 
+        <Link to={"/"} className="navbar-brand text-white">
+          Login
+        </Link>
+         )} 
+
+       {isLoggedIn && location.pathname == "/home" && ( 
+        <Link to={"/home"} className="navbar-brand text-white">
+          Home
+        </Link>
+         )}
+       
+
+        {isLoggedIn && (
+    
+      <Button type="submit" onClick={logout} class="form-submit-button ms-auto" style={{marginLeft:"auto"}}
+      >Logout</Button>
+
+        )}
+
+
+      </Container>
+    </Navbar>
+
+    <Container className="mt-5">
+      <Row>
+        <Col md={12}>
+          <Routes>
+            <Route exact path='/login' element={<Login/>}/>
+          <Route exact path='/home' element={<ProtectedRoute><Home/></ProtectedRoute>}/> 
+            {/* <Route exact path='/' element={<ProtectedRoute>< Home/></ProtectedRoute>} />
+            <Route exact path='/wordList' element={<ProtectedRoute>< ListWord /></ProtectedRoute>} />
+            <Route exact path='/verbList' element={<ProtectedRoute>< VerbList /></ProtectedRoute>} />
+            <Route exact path='/create' element={<ProtectedRoute>< Create /></ProtectedRoute>} />
+            <Route exact path='/createVerb' element={<ProtectedRoute><CreateVerb /></ProtectedRoute>} />
+            <Route exact path='/home' element={<ProtectedRoute><Home/></ProtectedRoute>}/> */}
+           
+          </Routes>
+        </Col>
+      </Row>
+    </Container>
+  </>);
+   
 }
 
-export default App
+export default App;
