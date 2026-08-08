@@ -17,6 +17,7 @@ import {
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./components/home";
 import Login from "./components/login";
+import listWords from "./components/listWords";
 
 function App() {
   const navigate = useNavigate();
@@ -74,7 +75,6 @@ function App() {
               Logout
             </Button>
           )}
-
         </Container>
       </Navbar>
 
@@ -95,6 +95,11 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
+              <Route path="listWords/" element={
+              <ProtectedRoute>
+              <listWords></listWords>
+              </ProtectedRoute>}/>
             </Routes>
           </Col>
         </Row>
