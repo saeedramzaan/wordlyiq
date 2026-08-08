@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-export default function Login() {
+export default function Login({setIsLoggedIn}) {
 
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    
+   // const[isLoggedIn, setIsLoggedIn] = useState
 
     const login = async (e) => {
 
@@ -43,7 +43,7 @@ export default function Login() {
       
         console.log(response.data.token);
       
-
+        setIsLoggedIn(true); // Pass this value to app.jsx
         navigate('/home');
 
       } catch(err) {
