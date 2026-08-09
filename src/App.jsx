@@ -17,7 +17,8 @@ import {
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./components/home";
 import Login from "./components/login";
-import listWords from "./components/listWords";
+import List from "./components/list";
+// import Create from "./components/createWords";
 
 
 function App() {
@@ -98,13 +99,23 @@ function App() {
               />
 
               <Route
-                path="/listWords"
+                path="/list"
                 element={
                   <ProtectedRoute>
-                    <listWords/>
+                    <List/>
                   </ProtectedRoute>
                 }
               />
+
+
+                {/* <Route
+                path="/create"
+                element={
+                  <ProtectedRoute>
+                    <Create/>
+                  </ProtectedRoute>
+                }
+              /> */}
 
              
             </Routes>
