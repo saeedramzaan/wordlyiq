@@ -605,19 +605,7 @@ const handleRowClick = (
     
                         {tableInfo.map((row, key) => (
     
-                          <tr
-                            // key={key}
-                            // onClick={() =>
-                            //   handleRowClick(
-                            //     row.q_id,
-                            //     row.question,
-                            //     row.answer,
-                            //     row.verse_no,
-                            //     row.correct_answer,
-                            //     row.category
-                            //   )
-                            // }
-                          >
+                          <tr key={key}>
     
                             <td>{row.q_id}</td>
     
