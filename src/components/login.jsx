@@ -43,7 +43,7 @@ export default function Login({setIsLoggedIn}) {
       
         console.log(response.data.token);
       
-        setIsLoggedIn(true);
+        setIsLoggedIn(true); // Pass this value to app.jsx
         navigate('/home');
 
       } catch(err) {

@@ -17,6 +17,9 @@ import {
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./components/home";
 import Login from "./components/login";
+import List from "./components/list";
+// import Create from "./components/createWords";
+
 
 function App() {
   const navigate = useNavigate();
@@ -74,7 +77,6 @@ function App() {
               Logout
             </Button>
           )}
-
         </Container>
       </Navbar>
 
@@ -95,6 +97,27 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
+              <Route
+                path="/list"
+                element={
+                  <ProtectedRoute>
+                    <List/>
+                  </ProtectedRoute>
+                }
+              />
+
+
+                {/* <Route
+                path="/create"
+                element={
+                  <ProtectedRoute>
+                    <Create/>
+                  </ProtectedRoute>
+                }
+              /> */}
+
+             
             </Routes>
           </Col>
         </Row>

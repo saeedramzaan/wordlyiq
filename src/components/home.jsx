@@ -48,7 +48,7 @@ export default function Home() {
 
 
   <div className="d-flex justify-content-evenly">
-    <Link className="btn btn-primary mb-2" to={"/wordList"}>
+    <Link className="btn btn-primary mb-2" to={"/list"}>
       Create English Words
     </Link>
     <Link className="btn btn-primary mb-2" to={"/verbList"}>
