@@ -57,7 +57,7 @@ export default function list() {
 
   const [formData, setFormData] = useState({
       qId:'',
-      name: '',
+      question: '',
       answer1: '',
       answer2: '',
       answer3: '',
@@ -208,7 +208,7 @@ const handleRowClick = (
 
   setFormData({
     qId: qId,
-    name: question, // <-- IMPORTANT: use "name", not "question"
+    question: question, 
     answer1: arrayValues[0]?.replace(/["']/g, "").trim(),
     answer2: arrayValues[1]?.replace(/["']/g, "").trim(),
     answer3: arrayValues[2]?.replace(/["']/g, "").trim(),
@@ -246,6 +246,8 @@ const handleRowClick = (
         await axios.post(`https://lara-project-mocha.vercel.app/mapi/engUpdate`, formData).then(({ data }) => {
 
         console.log(data.status);
+
+     
         if (data.status == false) {
           Swal.fire({
             icon: "error",
@@ -254,7 +256,8 @@ const handleRowClick = (
         } else {
           Swal.fire({
             icon: "success",
-            text: "Success"
+            text: "Success",
+            target: dialogRef.current
           })
         //  navigate('/create')
        //  window.location.reload();
@@ -374,6 +377,25 @@ const handleRowClick = (
     
                     <Row>
     
+                    <Col md={6}>
+                        <div className="form-group mb-3">
+                          <label
+                            htmlFor="question"
+                            className="form-label"
+                          >
+                            Question:
+                          </label>
+    
+                          <input
+                            type="text"
+                            id="question"
+                            name="question"
+                            value={formData.question}
+                            onChange={handleChange1}
+                            className="form-input form-control"
+                          />
+                        </div>
+                      </Col>
                       {/* Answer 1 */}
                       <Col md={6}>
                         <div className="form-group mb-3">
@@ -592,8 +614,8 @@ const handleRowClick = (
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>Name</th>
-                          <th>Verse No</th>
+                          <th>Word</th>
+                          <th>Word ID</th>
                           <th>Answers</th>
                           <th>Correct Answer</th>
                           <th>Category</th>

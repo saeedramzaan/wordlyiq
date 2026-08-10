@@ -178,7 +178,7 @@ export default function create() {
 
           <div className="card">
             <div className="card-body">
-              <h4 className="card-title">Add Appointment</h4>
+              <h4 className="card-title">Create Question</h4>
            
               <div className="form-wrapper">
 
@@ -213,7 +213,7 @@ export default function create() {
                   <Row>
                     <Col>
                       <Form.Group controlId="Name">
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label>Word</Form.Label>
                         <Form.Control type="text" value={word} onChange={(event) => {
                           setWord(event.target.value)
                         }} />
@@ -222,7 +222,7 @@ export default function create() {
                                   
                     <Col>
                       <Form.Group controlId="Email">
-                        <Form.Label>Verse No</Form.Label>
+                        <Form.Label>Word ID</Form.Label>
                         <Form.Control type="text" value={verse_no} onChange={(event) => {
                           setVerse_no(event.target.value)
                         }} />
