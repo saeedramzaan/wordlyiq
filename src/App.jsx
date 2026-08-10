@@ -83,6 +83,12 @@ function App() {
             </Link>
           )}
 
+          {( location.pathname === "/create") && (
+            <Link to="/home" className="navbar-brand text-white">
+              Home
+            </Link>
+          )}
+
           {isLoggedIn && (
             <Button
               type="button"
