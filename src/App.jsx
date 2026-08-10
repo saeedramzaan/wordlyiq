@@ -12,6 +12,7 @@ import {
   Link,
   useLocation,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -56,13 +57,27 @@ function App() {
       <Navbar bg="dark" variant="dark">
         <Container>
 
-          {(location.pathname === "/" || location.pathname === "/login") && (
+        {( location.pathname === "/") && (
+            <Link to="/home" className="navbar-brand text-white">
+              Home
+            </Link>
+          )}
+     
+
+          {( location.pathname === "/login") && (
             <Link to="/login" className="navbar-brand text-white">
               Login
             </Link>
           )}
 
+
           {isLoggedIn && location.pathname === "/home" && (
+            <Link to="/home" className="navbar-brand text-white">
+              Home
+            </Link>
+          )}
+
+          {( location.pathname === "/list") && (
             <Link to="/home" className="navbar-brand text-white">
               Home
             </Link>
@@ -84,9 +99,32 @@ function App() {
         <Row>
           <Col md={12}>
             <Routes>
+
+            {/* {isLoggedIn && location.pathname === "/" && (
+             <Route
+             path="/home"
+             element={
+               <ProtectedRoute>
+                 <Home/>
+               </ProtectedRoute>
+             }
+           />
+          )} */}
+
+            <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Home/>
+                    </ProtectedRoute>
+                }
+              />
+
+
               <Route
                 path="/login"
-                element={<Login setIsLoggedIn={setIsLoggedIn} />}
+                // element={<Login setIsLoggedIn={setIsLoggedIn} />}
+                  element={isLoggedIn ? <Navigate to="/" replace /> : <Login setIsLoggedIn={setIsLoggedIn} />}
               />
 
               <Route

@@ -615,7 +615,7 @@ const handleRowClick = (
                         <tr>
                           <th>ID</th>
                           <th>Word</th>
-                          <th>Verse No</th>
+                          <th>Word ID</th>
                           <th>Answers</th>
                           <th>Correct Answer</th>
                           <th>Category</th>
