@@ -613,7 +613,7 @@ const handleRowClick = (
     
                       <thead>
                         <tr>
-                          <th>ID</th>
+                     
                           <th>Word</th>
                           <th>Word ID</th>
                           <th>Answers</th>
@@ -629,7 +629,7 @@ const handleRowClick = (
     
                           <tr key={key}>
     
-                            <td>{row.q_id}</td>
+                    
     
                             <td>{row.question}</td>
     
